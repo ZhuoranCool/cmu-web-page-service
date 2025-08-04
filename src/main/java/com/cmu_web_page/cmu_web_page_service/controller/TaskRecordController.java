@@ -15,17 +15,17 @@ import java.util.Optional;
 @RequestMapping("/api/task-records")
 @CrossOrigin(origins = "*") // Configure this properly for production
 public class TaskRecordController {
-    
+
     @Autowired
     private TaskRecordService taskRecordService;
-    
+
     // GET all task records
     @GetMapping
     public ResponseEntity<List<TaskRecord>> getAllTaskRecords() {
         List<TaskRecord> taskRecords = taskRecordService.getAllTaskRecords();
         return ResponseEntity.ok(taskRecords);
     }
-    
+
     // GET task record by ID
     @GetMapping("/{id}")
     public ResponseEntity<TaskRecord> getTaskRecordById(@PathVariable Long id) {
@@ -33,7 +33,7 @@ public class TaskRecordController {
         return taskRecord.map(ResponseEntity::ok)
                          .orElse(ResponseEntity.notFound().build());
     }
-    
+
     // GET task record by task ID
     @GetMapping("/task/{taskId}")
     public ResponseEntity<TaskRecord> getTaskRecordByTaskId(@PathVariable String taskId) {
@@ -41,31 +41,33 @@ public class TaskRecordController {
         return taskRecord.map(ResponseEntity::ok)
                          .orElse(ResponseEntity.notFound().build());
     }
-    
+
     // GET task records by participant ID
     @GetMapping("/participant/{participantId}")
     public ResponseEntity<List<TaskRecord>> getTaskRecordsByParticipantId(@PathVariable String participantId) {
         List<TaskRecord> taskRecords = taskRecordService.getTaskRecordsByParticipantId(participantId);
         return ResponseEntity.ok(taskRecords);
     }
-    
+
     // GET task records by task type
     @GetMapping("/type/{taskType}")
     public ResponseEntity<List<TaskRecord>> getTaskRecordsByTaskType(@PathVariable TaskType taskType) {
         List<TaskRecord> taskRecords = taskRecordService.getTaskRecordsByTaskType(taskType);
         return ResponseEntity.ok(taskRecords);
     }
-    
+
     // GET task records by treatment group
     @GetMapping("/treatment/{treatmentGroup}")
     public ResponseEntity<List<TaskRecord>> getTaskRecordsByTreatmentGroup(@PathVariable String treatmentGroup) {
         List<TaskRecord> taskRecords = taskRecordService.getTaskRecordsByTreatmentGroup(treatmentGroup);
         return ResponseEntity.ok(taskRecords);
     }
-    
+
     // POST create new task record
     @PostMapping
     public ResponseEntity<TaskRecord> createTaskRecord(@RequestBody TaskRecord taskRecord) {
+        System.out.println("进入创建任务记录接口");
+        System.out.println("create_taskRecord = " + taskRecord);
         try {
             TaskRecord createdTaskRecord = taskRecordService.createTaskRecord(taskRecord);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTaskRecord);
@@ -73,10 +75,12 @@ public class TaskRecordController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    
+
     // PUT update task record
     @PutMapping("/{id}")
     public ResponseEntity<TaskRecord> updateTaskRecord(@PathVariable Long id, @RequestBody TaskRecord taskRecordDetails) {
+        System.out.println("进入修改任务记录接口");
+        System.out.println("update_taskRecordDetails = " + taskRecordDetails);;
         try {
             TaskRecord updatedTaskRecord = taskRecordService.updateTaskRecord(id, taskRecordDetails);
             return ResponseEntity.ok(updatedTaskRecord);
@@ -86,7 +90,7 @@ public class TaskRecordController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    
+
     // DELETE task record by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTaskRecord(@PathVariable Long id) {
@@ -97,14 +101,14 @@ public class TaskRecordController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
     // DELETE all task records
     @DeleteMapping
     public ResponseEntity<Void> deleteAllTaskRecords() {
         taskRecordService.deleteAllTaskRecords();
         return ResponseEntity.noContent().build();
     }
-    
+
     // DELETE task records by participant ID
     @DeleteMapping("/participant/{participantId}")
     public ResponseEntity<Void> deleteTaskRecordsByParticipantId(@PathVariable String participantId) {
