@@ -16,12 +16,15 @@ public class TaskRecord {
     @Column(name = "participant_id", nullable = false)
     private String participantId;
     
-    @Column(name = "task_id", nullable = false)
-    private String taskId;
+    @Column(name = "sid", nullable = false)
+    private String sid;
     
     @Column(name = "treatment_group", nullable = false)
     private String treatmentGroup;
     
+    @Column(name = "task_id", nullable = false)
+    private String taskId;
+
     @Column(name = "task_topic", nullable = false)
     private String taskTopic;
     
@@ -40,19 +43,20 @@ public class TaskRecord {
     @OneToMany(mappedBy = "taskRecord", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ClickEvent> clickSequence;
     
-    @Column(name = "show_more_interactions", nullable = false)
-    private Boolean showMoreInteractions;
+    @Embedded
+    private ShowMoreInteraction showMoreInteractions;
     
     // Constructors
     public TaskRecord() {}
     
-    public TaskRecord(String participantId, String taskId, String treatmentGroup, 
+    public TaskRecord(String participantId, String sid, String treatmentGroup, 
                      String taskTopic, TaskType taskType, LocalDateTime taskStartTime,
-                     Boolean showMoreInteractions) {
+                     ShowMoreInteraction showMoreInteractions) {
         this.participantId = participantId;
-        this.taskId = taskId;
+        this.sid = sid;
         this.treatmentGroup = treatmentGroup;
         this.taskTopic = taskTopic;
+        this.taskId=
         this.taskType = taskType;
         this.taskStartTime = taskStartTime;
         this.showMoreInteractions = showMoreInteractions;
@@ -65,8 +69,10 @@ public class TaskRecord {
     public String getParticipantId() { return participantId; }
     public void setParticipantId(String participantId) { this.participantId = participantId; }
     
-    public String getTaskId() { return taskId; }
-    public void setTaskId(String taskId) { this.taskId = taskId; }
+    public String getSid() { return sid; }
+    public void setSid(String sid) { this.sid = sid; }
+
+    public String getTaskId() {return sid+"_"+participantId+"_"+taskTopic+"_"+ treatmentGroup;}
     
     public String getTreatmentGroup() { return treatmentGroup; }
     public void setTreatmentGroup(String treatmentGroup) { this.treatmentGroup = treatmentGroup; }
@@ -86,6 +92,6 @@ public class TaskRecord {
     public List<ClickEvent> getClickSequence() { return clickSequence; }
     public void setClickSequence(List<ClickEvent> clickSequence) { this.clickSequence = clickSequence; }
     
-    public Boolean getShowMoreInteractions() { return showMoreInteractions; }
-    public void setShowMoreInteractions(Boolean showMoreInteractions) { this.showMoreInteractions = showMoreInteractions; }
+    public ShowMoreInteraction getShowMoreInteractions() { return showMoreInteractions; }
+    public void setShowMoreInteractions(ShowMoreInteraction showMoreInteractions) { this.showMoreInteractions = showMoreInteractions; }
 }

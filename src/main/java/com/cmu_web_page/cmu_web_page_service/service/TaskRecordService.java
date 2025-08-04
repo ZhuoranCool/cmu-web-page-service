@@ -49,7 +49,7 @@ public class TaskRecordService {
         return taskRecordRepository.findById(id)
                 .map(taskRecord -> {
                     taskRecord.setParticipantId(taskRecordDetails.getParticipantId());
-                    taskRecord.setTaskId(taskRecordDetails.getTaskId());
+                    taskRecord.setSid(taskRecordDetails.getSid());
                     taskRecord.setTreatmentGroup(taskRecordDetails.getTreatmentGroup());
                     taskRecord.setTaskTopic(taskRecordDetails.getTaskTopic());
                     taskRecord.setTaskType(taskRecordDetails.getTaskType());

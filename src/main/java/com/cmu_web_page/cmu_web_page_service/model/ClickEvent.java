@@ -2,67 +2,157 @@ package com.cmu_web_page.cmu_web_page_service.model;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "click_events")
 public class ClickEvent {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_record_id")
     @JsonIgnore
     private TaskRecord taskRecord;
-    
-    @Column(name = "element_id")
-    private String elementId;
-    
-    @Column(name = "element_type")
-    private String elementType;
-    
-    @Column(name = "click_timestamp")
-    private LocalDateTime clickTimestamp;
-    
-    @Column(name = "x_coordinate")
-    private Integer xCoordinate;
-    
-    @Column(name = "y_coordinate")
-    private Integer yCoordinate;
-    
+
+    @Column(name = "click_order")
+    private Integer click_order;
+
+    @Column(name = "page_title")
+    private String page_title;
+
+    @Column(name = "page_id")
+    private String page_DateTime;
+
+    @Column(name = "is_ad")
+    private boolean is_ad;
+
+    @Column(name = "position_in_serp")
+    private Integer position_in_serp;
+
+    @Column(name = "click_time")
+    private String click_time;
+
+    @Column(name = "dwell_time_sec")
+    private Double dwell_time_sec;
+
+    @Column(name = "from_overview")
+    private Boolean from_overview;
+
+    @Column(name = "from_ai_mode")
+    private Boolean from_ai_mode;
+
     // Constructors
-    public ClickEvent() {}
-    
-    public ClickEvent(String elementId, String elementType, LocalDateTime clickTimestamp, 
-                     Integer xCoordinate, Integer yCoordinate) {
-        this.elementId = elementId;
-        this.elementType = elementType;
-        this.clickTimestamp = clickTimestamp;
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+    public ClickEvent() {
     }
+
+    public ClickEvent(Long id, TaskRecord taskRecord, Integer click_order, String page_title, String page_DateTime,
+            boolean is_ad, Integer position_in_serp, String click_time, Double dwell_time_sec, Boolean from_overview,
+            Boolean from_ai_mode) {
+        this.id = id;
+        this.taskRecord = taskRecord;
+        this.click_order = click_order;
+        this.page_title = page_title;
+        this.page_DateTime = page_DateTime;
+        this.is_ad = is_ad;
+        this.position_in_serp = position_in_serp;
+        this.click_time = click_time;
+        this.dwell_time_sec = dwell_time_sec;
+        this.from_overview = from_overview;
+        this.from_ai_mode = from_ai_mode;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public TaskRecord getTaskRecord() {
+        return taskRecord;
+    }
+
+    public Integer getClick_order() {
+        return click_order;
+    }
+
+    public String getPage_title() {
+        return page_title;
+    }
+
+    public String getPage_DateTime() {
+        return page_DateTime;
+    }
+
+    public boolean isIs_ad() {
+        return is_ad;
+    }
+
+    public Integer getPosition_in_serp() {
+        return position_in_serp;
+    }
+
+    public String getClick_time() {
+        return click_time;
+    }
+
+    public Double getDwell_time_sec() {
+        return dwell_time_sec;
+    }
+
+    public Boolean getFrom_overview() {
+        return from_overview;
+    }
+
+    public Boolean getFrom_ai_mode() {
+        return from_ai_mode;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTaskRecord(TaskRecord taskRecord) {
+        this.taskRecord = taskRecord;
+    }
+
+    public void setClick_order(Integer click_order) {
+        this.click_order = click_order;
+    }
+
+    public void setPage_title(String page_title) {
+        this.page_title = page_title;
+    }
+
+    public void setPage_DateTime(String page_DateTime) {
+        this.page_DateTime = page_DateTime;
+    }
+
+    public void setIs_ad(boolean is_ad) {
+        this.is_ad = is_ad;
+    }
+
+    public void setPosition_in_serp(Integer position_in_serp) {
+        this.position_in_serp = position_in_serp;
+    }
+
+    public void setClick_time(String click_time) {
+        this.click_time = click_time;
+    }
+
+    public void setDwell_time_sec(Double dwell_time_sec) {
+        this.dwell_time_sec = dwell_time_sec;
+    }
+
+    public void setFrom_overview(Boolean from_overview) {
+        this.from_overview = from_overview;
+    }
+
+    public void setFrom_ai_mode(Boolean from_ai_mode) {
+        this.from_ai_mode = from_ai_mode;
+    }
+
     
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    
-    public TaskRecord getTaskRecord() { return taskRecord; }
-    public void setTaskRecord(TaskRecord taskRecord) { this.taskRecord = taskRecord; }
-    
-    public String getElementId() { return elementId; }
-    public void setElementId(String elementId) { this.elementId = elementId; }
-    
-    public String getElementType() { return elementType; }
-    public void setElementType(String elementType) { this.elementType = elementType; }
-    
-    public LocalDateTime getClickTimestamp() { return clickTimestamp; }
-    public void setClickTimestamp(LocalDateTime clickTimestamp) { this.clickTimestamp = clickTimestamp; }
-    
-    public Integer getXCoordinate() { return xCoordinate; }
-    public void setXCoordinate(Integer xCoordinate) { this.xCoordinate = xCoordinate; }
-    
-    public Integer getYCoordinate() { return yCoordinate; }
-    public void setYCoordinate(Integer yCoordinate) { this.yCoordinate = yCoordinate; }
+
+
+
 }
