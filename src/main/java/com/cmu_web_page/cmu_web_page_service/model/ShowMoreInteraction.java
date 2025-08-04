@@ -35,6 +35,15 @@ public class ShowMoreInteraction {
         return if_click;
     }
 
+    @Override
+    public String toString() {
+        return "ShowMoreInteraction{" +
+                "click_order=" + click_order +
+                ", if_click=" + if_click +
+                ", click_time='" + click_time + '\'' +
+                '}';
+    }
+
     public void setIf_click(Boolean if_click) {
         this.if_click = if_click;
     }

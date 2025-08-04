@@ -11,10 +11,13 @@ public class ClickEvent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "task_record_id")
     @JsonIgnore
     private TaskRecord taskRecord;
+
+    @Column(name = "task_id", nullable = false)
+    private String taskId;
 
     @Column(name = "click_order")
     private Integer click_order;
@@ -119,8 +122,28 @@ public class ClickEvent {
         this.click_order = click_order;
     }
 
+
+
     public void setPage_title(String page_title) {
         this.page_title = page_title;
+    }
+
+    @Override
+    public String toString() {
+        return "ClickEvent{" +
+                "id=" + id +
+                ", taskRecord=" + taskRecord +
+                ", taskId='" + taskId + '\'' +
+                ", click_order=" + click_order +
+                ", page_title='" + page_title + '\'' +
+                ", page_DateTime='" + page_DateTime + '\'' +
+                ", is_ad=" + is_ad +
+                ", position_in_serp=" + position_in_serp +
+                ", click_time='" + click_time + '\'' +
+                ", dwell_time_sec=" + dwell_time_sec +
+                ", from_overview=" + from_overview +
+                ", from_ai_mode=" + from_ai_mode +
+                '}';
     }
 
     public void setPage_DateTime(String page_DateTime) {
@@ -151,8 +174,12 @@ public class ClickEvent {
         this.from_ai_mode = from_ai_mode;
     }
 
-    
 
+    public String getTaskId() {
+        return taskId;
+    }
 
-
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
 }
