@@ -52,12 +52,15 @@ public class TaskRecord {
     @Embedded
     private ShowMoreInteraction showMoreInteractions;
 
+    @Embedded
+    private ShowAllInteraction showAllInteractions;
+
     // Constructors
     public TaskRecord() {}
 
     public TaskRecord(String participantId, String sid, String treatmentGroup,
                      String taskTopic, TaskType taskType, LocalDateTime taskStartTime,
-                     ShowMoreInteraction showMoreInteractions,String taskId) {
+                     ShowMoreInteraction showMoreInteractions, ShowAllInteraction showAllInteractions, String taskId) {
         this.participantId = participantId;
         this.sid = sid;
         this.treatmentGroup = treatmentGroup;
@@ -66,6 +69,7 @@ public class TaskRecord {
         this.taskType = taskType;
         this.taskStartTime = taskStartTime;
         this.showMoreInteractions = showMoreInteractions;
+        this.showAllInteractions = showAllInteractions;
     }
 
     // Getters and Setters
@@ -103,6 +107,7 @@ public class TaskRecord {
                 ", taskEndTime=" + taskEndTime +
                 ", clickSequence=" + clickSequence +
                 ", showMoreInteractions=" + showMoreInteractions +
+                 ", showAllInteractions=" + showAllInteractions +
                 '}';
     }
 
@@ -117,4 +122,15 @@ public class TaskRecord {
 
     public ShowMoreInteraction getShowMoreInteractions() { return showMoreInteractions; }
     public void setShowMoreInteractions(ShowMoreInteraction showMoreInteractions) { this.showMoreInteractions = showMoreInteractions; }
+
+    public ShowAllInteraction getShowAllInteractions() {
+        return showAllInteractions;
+    }
+    public void setShowAllInteractions(ShowAllInteraction showAllInteractions) {
+        this.showAllInteractions = showAllInteractions;
+    }
+
+
+
+    
 }

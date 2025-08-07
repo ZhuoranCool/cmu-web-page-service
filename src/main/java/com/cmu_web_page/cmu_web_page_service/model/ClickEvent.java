@@ -32,7 +32,7 @@ public class ClickEvent {
     private boolean is_ad;
 
     @Column(name = "position_in_serp")
-    private Integer position_in_serp;
+    private String position_in_serp;
 
     @Column(name = "click_time")
     private String click_time;
@@ -51,7 +51,7 @@ public class ClickEvent {
     }
 
     public ClickEvent(Long id, TaskRecord taskRecord, Integer click_order, String page_title, String page_DateTime,
-            boolean is_ad, Integer position_in_serp, String click_time, Double dwell_time_sec, Boolean from_overview,
+            boolean is_ad, String position_in_serp, String click_time, Double dwell_time_sec, Boolean from_overview,
             Boolean from_ai_mode) {
         this.id = id;
         this.taskRecord = taskRecord;
@@ -90,7 +90,7 @@ public class ClickEvent {
         return is_ad;
     }
 
-    public Integer getPosition_in_serp() {
+    public String getPosition_in_serp() {
         return position_in_serp;
     }
 
@@ -154,7 +154,7 @@ public class ClickEvent {
         this.is_ad = is_ad;
     }
 
-    public void setPosition_in_serp(Integer position_in_serp) {
+    public void setPosition_in_serp(String position_in_serp) {
         this.position_in_serp = position_in_serp;
     }
 
