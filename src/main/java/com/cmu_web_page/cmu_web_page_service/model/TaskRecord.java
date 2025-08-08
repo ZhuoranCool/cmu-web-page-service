@@ -49,12 +49,21 @@ public class TaskRecord {
     @OneToMany(mappedBy = "taskRecord", cascade = CascadeType.ALL)
     private List<ClickEvent> clickSequence;
 
-    @Embedded
-    private ShowMoreInteraction showMoreInteractions;
+   @Embedded
+@AttributeOverrides({
+    @AttributeOverride(name = "click_order", column = @Column(name = "show_more_click_order")),
+    @AttributeOverride(name = "if_click", column = @Column(name = "show_more_if_click")),
+    @AttributeOverride(name = "click_time", column = @Column(name = "show_more_click_time"))
+})
+private ShowMoreInteraction showMoreInteractions;
 
-    @Embedded
-    private ShowAllInteraction showAllInteractions;
-
+@Embedded
+@AttributeOverrides({
+    @AttributeOverride(name = "click_order", column = @Column(name = "show_all_click_order")),
+    @AttributeOverride(name = "if_click", column = @Column(name = "show_all_if_click")),
+    @AttributeOverride(name = "click_time", column = @Column(name = "show_all_click_time"))
+})
+private ShowAllInteraction showAllInteractions;
     // Constructors
     public TaskRecord() {}
 

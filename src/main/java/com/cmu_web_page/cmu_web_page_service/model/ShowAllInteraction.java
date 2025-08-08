@@ -1,7 +1,9 @@
 package com.cmu_web_page.cmu_web_page_service.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
+@Embeddable
 public class ShowAllInteraction {
     @Column(name = "click_order")
     private Integer click_order;
