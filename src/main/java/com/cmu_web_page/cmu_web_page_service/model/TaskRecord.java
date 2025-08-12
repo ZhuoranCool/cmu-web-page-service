@@ -49,58 +49,109 @@ public class TaskRecord {
     @OneToMany(mappedBy = "taskRecord", cascade = CascadeType.ALL)
     private List<ClickEvent> clickSequence;
 
-   @Embedded
-@AttributeOverrides({
-    @AttributeOverride(name = "click_order", column = @Column(name = "show_more_click_order")),
-    @AttributeOverride(name = "if_click", column = @Column(name = "show_more_if_click")),
-    @AttributeOverride(name = "click_time", column = @Column(name = "show_more_click_time"))
-})
-private ShowMoreInteraction showMoreInteractions;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "click_order", column = @Column(name = "show_more_click_order")),
+            @AttributeOverride(name = "if_click", column = @Column(name = "show_more_if_click")),
+            @AttributeOverride(name = "click_time", column = @Column(name = "show_more_click_time"))
+    })
+    private ShowMoreInteraction showMoreInteractions;
 
-@Embedded
-@AttributeOverrides({
-    @AttributeOverride(name = "click_order", column = @Column(name = "show_all_click_order")),
-    @AttributeOverride(name = "if_click", column = @Column(name = "show_all_if_click")),
-    @AttributeOverride(name = "click_time", column = @Column(name = "show_all_click_time"))
-})
-private ShowAllInteraction showAllInteractions;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "click_order", column = @Column(name = "show_all_click_order")),
+            @AttributeOverride(name = "if_click", column = @Column(name = "show_all_if_click")),
+            @AttributeOverride(name = "click_time", column = @Column(name = "show_all_click_time"))
+    })
+
+    @Column(name = "page_click_statics_1")
+    private Integer pageClickStatics_1;
+
+    @Column(name = "page_click_statics_2")
+    private Integer pageClickStatics_2;
+
+    @Column(name = "page_click_statics_3")
+    private Integer pageClickStatics_3;
+
+    @Column(name = "page_click_statics_4")
+    private Integer pageClickStatics_4;
+
+    private ShowAllInteraction showAllInteractions;
+
     // Constructors
-    public TaskRecord() {}
+    public TaskRecord() {
+    }
 
     public TaskRecord(String participantId, String sid, String treatmentGroup,
-                     String taskTopic, TaskType taskType, LocalDateTime taskStartTime,
-                     ShowMoreInteraction showMoreInteractions, ShowAllInteraction showAllInteractions, String taskId) {
+            String taskTopic, TaskType taskType, LocalDateTime taskStartTime,
+            ShowMoreInteraction showMoreInteractions, ShowAllInteraction showAllInteractions, Integer page_click_statics_1, Integer page_click_statics_2, Integer page_click_statics_3, Integer page_click_statics_4, String taskId) {
         this.participantId = participantId;
         this.sid = sid;
         this.treatmentGroup = treatmentGroup;
         this.taskTopic = taskTopic;
-        this.taskId= taskId;
+        this.taskId = taskId;
         this.taskType = taskType;
         this.taskStartTime = taskStartTime;
         this.showMoreInteractions = showMoreInteractions;
         this.showAllInteractions = showAllInteractions;
+        this.pageClickStatics_1 = page_click_statics_1;
+        this.pageClickStatics_2 = page_click_statics_2;
+        this.pageClickStatics_3 = page_click_statics_3;
+        this.pageClickStatics_4 = page_click_statics_4;
     }
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getParticipantId() { return participantId; }
-    public void setParticipantId(String participantId) { this.participantId = participantId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getSid() { return sid; }
-    public void setSid(String sid) { this.sid = sid; }
+    public String getParticipantId() {
+        return participantId;
+    }
 
-    public String getTaskId() {return sid+"_"+participantId+"_"+taskTopic+"_"+ treatmentGroup;}
+    public void setParticipantId(String participantId) {
+        this.participantId = participantId;
+    }
 
-    public String getTreatmentGroup() { return treatmentGroup; }
-    public void setTreatmentGroup(String treatmentGroup) { this.treatmentGroup = treatmentGroup; }
+    public String getSid() {
+        return sid;
+    }
 
-    public String getTaskTopic() { return taskTopic; }
-    public void setTaskTopic(String taskTopic) { this.taskTopic = taskTopic; }
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
 
-    public TaskType getTaskType() { return taskType; }
-    public void setTaskType(TaskType taskType) { this.taskType = taskType; }
+    public String getTaskId() {
+        return sid + "_" + participantId + "_" + taskTopic + "_" + treatmentGroup;
+    }
+
+    public String getTreatmentGroup() {
+        return treatmentGroup;
+    }
+
+    public void setTreatmentGroup(String treatmentGroup) {
+        this.treatmentGroup = treatmentGroup;
+    }
+
+    public String getTaskTopic() {
+        return taskTopic;
+    }
+
+    public void setTaskTopic(String taskTopic) {
+        this.taskTopic = taskTopic;
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
 
     @Override
     public String toString() {
@@ -116,30 +167,87 @@ private ShowAllInteraction showAllInteractions;
                 ", taskEndTime=" + taskEndTime +
                 ", clickSequence=" + clickSequence +
                 ", showMoreInteractions=" + showMoreInteractions +
-                 ", showAllInteractions=" + showAllInteractions +
+                ", showAllInteractions=" + showAllInteractions +
+                ", pageClickStatics_1=" + pageClickStatics_1 +
+                ", pageClickStatics_2=" + pageClickStatics_2 +
+                ", pageClickStatics_3=" + pageClickStatics_3 +
+                ", pageClickStatics_4=" + pageClickStatics_4 +
                 '}';
     }
 
-    public LocalDateTime getTaskStartTime() { return taskStartTime; }
-    public void setTaskStartTime(LocalDateTime taskStartTime) { this.taskStartTime = taskStartTime; }
+    public LocalDateTime getTaskStartTime() {
+        return taskStartTime;
+    }
 
-    public LocalDateTime getTaskEndTime() { return taskEndTime; }
-    public void setTaskEndTime(LocalDateTime taskEndTime) { this.taskEndTime = taskEndTime; }
+    public void setTaskStartTime(LocalDateTime taskStartTime) {
+        this.taskStartTime = taskStartTime;
+    }
 
-    public List<ClickEvent> getClickSequence() { return clickSequence; }
-    public void setClickSequence(List<ClickEvent> clickSequence) { this.clickSequence = clickSequence; }
+    public LocalDateTime getTaskEndTime() {
+        return taskEndTime;
+    }
 
-    public ShowMoreInteraction getShowMoreInteractions() { return showMoreInteractions; }
-    public void setShowMoreInteractions(ShowMoreInteraction showMoreInteractions) { this.showMoreInteractions = showMoreInteractions; }
+    public void setTaskEndTime(LocalDateTime taskEndTime) {
+        this.taskEndTime = taskEndTime;
+    }
+
+    public List<ClickEvent> getClickSequence() {
+        return clickSequence;
+    }
+
+    public void setClickSequence(List<ClickEvent> clickSequence) {
+        this.clickSequence = clickSequence;
+    }
+
+    public ShowMoreInteraction getShowMoreInteractions() {
+        return showMoreInteractions;
+    }
+
+    public void setShowMoreInteractions(ShowMoreInteraction showMoreInteractions) {
+        this.showMoreInteractions = showMoreInteractions;
+    }
 
     public ShowAllInteraction getShowAllInteractions() {
         return showAllInteractions;
     }
+
     public void setShowAllInteractions(ShowAllInteraction showAllInteractions) {
         this.showAllInteractions = showAllInteractions;
     }
 
+    public Integer getPageClickStatics_1() {
+        return pageClickStatics_1;
+    }
 
+    public Integer getPageClickStatics_2() {
+        return pageClickStatics_2;
+    }
+
+    public Integer getPageClickStatics_3() {
+        return pageClickStatics_3;
+    }
+
+    public Integer getPageClickStatics_4() {
+        return pageClickStatics_4;
+    }
+
+    public void setPageClickStatics_1(Integer pageClickStatics_1) {
+        this.pageClickStatics_1 = pageClickStatics_1;
+    }
+
+    public void setPageClickStatics_2(Integer pageClickStatics_2) {
+        this.pageClickStatics_2 = pageClickStatics_2;
+    }
+
+    public void setPageClickStatics_3(Integer pageClickStatics_3) {
+        this.pageClickStatics_3 = pageClickStatics_3;
+    }
+
+    public void setPageClickStatics_4(Integer pageClickStatics_4) {
+        this.pageClickStatics_4 = pageClickStatics_4;
+    }
 
     
+
+
 }
