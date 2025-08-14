@@ -58,11 +58,12 @@ public class TaskRecord {
     private ShowMoreInteraction showMoreInteractions;
 
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "click_order", column = @Column(name = "show_all_click_order")),
-            @AttributeOverride(name = "if_click", column = @Column(name = "show_all_if_click")),
-            @AttributeOverride(name = "click_time", column = @Column(name = "show_all_click_time"))
-    })
+@AttributeOverrides({
+        @AttributeOverride(name = "click_order", column = @Column(name = "show_all_click_order")),
+        @AttributeOverride(name = "if_click", column = @Column(name = "show_all_if_click")),
+        @AttributeOverride(name = "click_time", column = @Column(name = "show_all_click_time"))
+})
+private ShowAllInteraction showAllInteractions;
 
     @Column(name = "page_click_statics_1")
     private Integer pageClickStatics_1;
@@ -75,8 +76,6 @@ public class TaskRecord {
 
     @Column(name = "page_click_statics_4")
     private Integer pageClickStatics_4;
-
-    private ShowAllInteraction showAllInteractions;
 
     // Constructors
     public TaskRecord() {
