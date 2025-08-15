@@ -45,7 +45,7 @@ public class TaskRecordService {
             return taskRecordRepository.save(fillEntity(taskRecord));
     }
 
-    public TaskRecord updateTaskRecord(Long id, TaskRecord taskRecordDetails) {
+    public TaskRecord updateTaskRecord(String taskId, TaskRecord taskRecordDetails) {
 //        return taskRecordRepository.findById(id)
 //                .map(taskRecord -> {
 //                    taskRecord.setParticipantId(taskRecordDetails.getParticipantId());

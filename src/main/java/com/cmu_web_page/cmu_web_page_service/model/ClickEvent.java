@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ClickEvent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -53,7 +52,8 @@ public class ClickEvent {
     public ClickEvent(Long id, TaskRecord taskRecord, Integer click_order, String page_title, String page_DateTime,
             boolean is_ad, String position_in_serp, String click_time, Double dwell_time_sec, Boolean from_overview,
             Boolean from_ai_mode) {
-        this.id = id;
+
+        this.id=id;
         this.taskRecord = taskRecord;
         this.click_order = click_order;
         this.page_title = page_title;

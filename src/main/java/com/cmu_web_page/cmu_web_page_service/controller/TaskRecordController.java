@@ -69,6 +69,14 @@ public class TaskRecordController {
         System.out.println("进入创建任务记录接口");
         System.out.println("create_taskRecord = " + taskRecord);
         try {
+            Optional<TaskRecord> existingRecord = taskRecordService.getTaskRecordByTaskId(taskRecord.getTaskId());
+
+            if(existingRecord.isPresent()){
+                TaskRecord updatedTaskRecord = taskRecordService.updateTaskRecord(taskRecord.getTaskId(),taskRecord);
+                return ResponseEntity.status(HttpStatus.CREATED).body(updatedTaskRecord);
+            }
+
+       
             TaskRecord createdTaskRecord = taskRecordService.createTaskRecord(taskRecord);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTaskRecord);
         } catch (Exception e) {
@@ -77,12 +85,12 @@ public class TaskRecordController {
     }
 
     // PUT update task record
-    @PutMapping("/{id}")
-    public ResponseEntity<TaskRecord> updateTaskRecord(@PathVariable Long id, @RequestBody TaskRecord taskRecordDetails) {
+    @PutMapping("/{taskId}")
+    public ResponseEntity<TaskRecord> updateTaskRecord(@PathVariable String taskId, @RequestBody TaskRecord taskRecordDetails) {
         System.out.println("进入修改任务记录接口");
         System.out.println("update_taskRecordDetails = " + taskRecordDetails);;
         try {
-            TaskRecord updatedTaskRecord = taskRecordService.updateTaskRecord(id, taskRecordDetails);
+            TaskRecord updatedTaskRecord = taskRecordService.updateTaskRecord(taskId, taskRecordDetails);
             return ResponseEntity.ok(updatedTaskRecord);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
