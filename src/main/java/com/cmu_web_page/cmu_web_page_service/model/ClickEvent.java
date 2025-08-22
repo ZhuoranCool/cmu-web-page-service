@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ClickEvent {
 
     @Id
+    @Column(name="id")
     private Long id;
 
     @ManyToOne

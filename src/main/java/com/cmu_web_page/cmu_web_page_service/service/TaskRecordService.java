@@ -76,6 +76,8 @@ public class TaskRecordService {
 
     private TaskRecord fillEntity(TaskRecord taskRecord) {
         taskRecord.getClickSequence().forEach(clickEvent -> clickEvent.setTaskRecord(taskRecord));
+        taskRecord.getShowMoreInteractions().forEach(showMoreInteraction -> showMoreInteraction.setTaskRecord(taskRecord));
+         taskRecord.getShowAllInteractions().forEach(showAllInteraction -> showAllInteraction.setTaskRecord(taskRecord));
         return taskRecord;
     }
 }

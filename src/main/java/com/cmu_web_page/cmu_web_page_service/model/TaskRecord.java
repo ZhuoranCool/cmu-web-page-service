@@ -49,21 +49,11 @@ public class TaskRecord {
     @OneToMany(mappedBy = "taskRecord", cascade = CascadeType.ALL)
     private List<ClickEvent> clickSequence;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "click_order", column = @Column(name = "show_more_click_order")),
-            @AttributeOverride(name = "if_click", column = @Column(name = "show_more_if_click")),
-            @AttributeOverride(name = "click_time", column = @Column(name = "show_more_click_time"))
-    })
-    private ShowMoreInteraction showMoreInteractions;
+    @OneToMany(mappedBy = "taskRecord", cascade = CascadeType.ALL)
+    private List<ShowMoreInteraction> showMoreInteractions;
 
-    @Embedded
-@AttributeOverrides({
-        @AttributeOverride(name = "click_order", column = @Column(name = "show_all_click_order")),
-        @AttributeOverride(name = "if_click", column = @Column(name = "show_all_if_click")),
-        @AttributeOverride(name = "click_time", column = @Column(name = "show_all_click_time"))
-})
-private ShowAllInteraction showAllInteractions;
+    @OneToMany(mappedBy = "taskRecord", cascade = CascadeType.ALL)
+    private List<ShowAllInteraction> showAllInteractions;
 
     @Column(name = "page_click_statics_1")
     private Integer pageClickStatics_1;
@@ -83,7 +73,7 @@ private ShowAllInteraction showAllInteractions;
 
     public TaskRecord(String participantId, String sid, String treatmentGroup,
             String taskTopic, TaskType taskType, LocalDateTime taskStartTime,
-            ShowMoreInteraction showMoreInteractions, ShowAllInteraction showAllInteractions, Integer page_click_statics_1, Integer page_click_statics_2, Integer page_click_statics_3, Integer page_click_statics_4, String taskId) {
+            Integer page_click_statics_1, Integer page_click_statics_2, Integer page_click_statics_3, Integer page_click_statics_4, String taskId) {
         this.participantId = participantId;
         this.sid = sid;
         this.treatmentGroup = treatmentGroup;
@@ -91,8 +81,6 @@ private ShowAllInteraction showAllInteractions;
         this.taskId = taskId;
         this.taskType = taskType;
         this.taskStartTime = taskStartTime;
-        this.showMoreInteractions = showMoreInteractions;
-        this.showAllInteractions = showAllInteractions;
         this.pageClickStatics_1 = page_click_statics_1;
         this.pageClickStatics_2 = page_click_statics_2;
         this.pageClickStatics_3 = page_click_statics_3;
@@ -198,19 +186,19 @@ private ShowAllInteraction showAllInteractions;
         this.clickSequence = clickSequence;
     }
 
-    public ShowMoreInteraction getShowMoreInteractions() {
+    public List<ShowMoreInteraction> getShowMoreInteractions() {
         return showMoreInteractions;
     }
 
-    public void setShowMoreInteractions(ShowMoreInteraction showMoreInteractions) {
+    public void setShowMoreInteractions(List<ShowMoreInteraction> showMoreInteractions) {
         this.showMoreInteractions = showMoreInteractions;
     }
 
-    public ShowAllInteraction getShowAllInteractions() {
+    public List<ShowAllInteraction> getShowAllInteractions() {
         return showAllInteractions;
     }
 
-    public void setShowAllInteractions(ShowAllInteraction showAllInteractions) {
+    public void setShowAllInteractions(List <ShowAllInteraction >showAllInteractions) {
         this.showAllInteractions = showAllInteractions;
     }
 
